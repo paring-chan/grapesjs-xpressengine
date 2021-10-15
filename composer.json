@@ -1,0 +1,36 @@
+{
+  "name": "xpressengine-plugin/grapes_js",
+  "description": "Grapes.js를 이용한 페이지 빌더 플러그인",
+  "keywords": [
+    "xpressengine",
+    "plugin"
+  ],
+  "license": "LGPL-3.0-or-later",
+  "version": "1.0.0",
+  "type": "xpressengine-plugin",
+  "support": {
+    "email": "parangee9706@gmail.com"
+  },
+  "authors": [
+    {
+      "name": "pikokr",
+      "email": "parangee9706@gmail.com",
+      "homepage": "https://pikokr.dev",
+      "role": "Developer"
+    }
+  ],
+  "extra": {
+    "xpressengine": {
+      "title": "Grapes.js",
+      "component": {}
+    }
+  },
+  "require": {
+    "xpressengine/xpressengine": "~3.0.14"
+  },
+  "autoload": {
+    "psr-4": {
+      "Pikokr\\XePlugin\\GrapesJs\\": "src/"
+    }
+  }
+}
