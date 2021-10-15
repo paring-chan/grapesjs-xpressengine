@@ -1,4 +1,5 @@
 <?php
+namespace Pikokr\XePlugin\GrapesJs\Components\Modules;
 
 class GrapesJSModule extends \Xpressengine\Menu\AbstractModule {
     public function createMenuForm()

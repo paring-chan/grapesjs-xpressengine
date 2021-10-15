@@ -22,7 +22,13 @@
   "extra": {
     "xpressengine": {
       "title": "Grapes.js",
-      "component": {}
+      "component": {
+        "module/grapes_js@grapes_js": {
+          "class": "Pikokr\\XePlugin\\GrapesJs\\Components\\Modules\\GrapesJSModule",
+          "name": "Grapes.JS",
+          "description": "Grapes.JS 페이지 빌더 모듈"
+        }
+      }
     }
   },
   "require": {
