@@ -1,0 +1,18 @@
+{
+  "name": "assets",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "devDependencies": {
+    "laravel-mix": "^6.0.34",
+    "prettier": "^2.4.1",
+    "resolve-url-loader": "^4.0.0",
+    "sass": "^1.43.2",
+    "sass-loader": "^12.1.0"
+  },
+  "dependencies": {
+    "axios": "^0.23.0",
+    "grapesjs": "^0.17.27",
+    "grapesjs-preset-webpage": "^0.1.11"
+  }
+}
