@@ -1,1 +1,4 @@
-<div class="title">{{ $title }}</div>
+{!! $html !!}
+<style>
+    {{$css}}
+</style>

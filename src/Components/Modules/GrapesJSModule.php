@@ -2,9 +2,11 @@
 
 namespace Pikokr\XePlugin\GrapesJs\Components\Modules;
 
+use App\Facades\XeDB;
 use Pikokr\XePlugin\GrapesJs\GrapesJSHandler;
 use View;
 use Route;
+use Xpressengine\Config\ConfigManager;
 use Xpressengine\Menu\AbstractModule;
 
 class GrapesJSModule extends AbstractModule
@@ -12,6 +14,13 @@ class GrapesJSModule extends AbstractModule
     public static function boot()
     {
         self::registerSettingsRoute();
+        self::registerInstanceRoute();
+    }
+
+    protected static function registerInstanceRoute() {
+        Route::instance(self::getId(), function() {
+            Route::get('/', ['as' => 'index', 'uses' => 'Pikokr\XePlugin\GrapesJs\Controllers\GrapesJsInstanceController@index']);
+        });
     }
 
     protected static function registerSettingsRoute()
@@ -21,6 +30,9 @@ class GrapesJSModule extends AbstractModule
                 'as' => 'settings.grapes_js.grapes_js.config',
                 'uses' => 'Pikokr\XePlugin\GrapesJs\Controllers\GrapesJsSettingsController@editConfig']
             );
+            Route::put('config/{pageId}', [
+                'uses' => 'Pikokr\XePlugin\GrapesJs\Controllers\GrapesJsSettingsController@saveConfig'
+            ]);
         });
     }
 
@@ -66,7 +78,17 @@ class GrapesJSModule extends AbstractModule
 
     public function deleteMenu($instanceId)
     {
-        // TODO: Implement deleteMenu() method.
+        XeDB::beginTransaction();
+
+        try {
+            $configManager = app('xe.config');
+
+            $configManager->removeByName(GrapesJSModule::getId() . '.' . $instanceId);
+        } catch (\Exception $e) {
+            XeDB::rollback();
+            throw $e;
+        }
+        XeDB::commit();
     }
 
     public function getTypeItem($id)
