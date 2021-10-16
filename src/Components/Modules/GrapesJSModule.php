@@ -2,6 +2,7 @@
 
 namespace Pikokr\XePlugin\GrapesJs\Components\Modules;
 
+use Pikokr\XePlugin\GrapesJs\GrapesJSHandler;
 use View;
 use Route;
 use Xpressengine\Menu\AbstractModule;
@@ -28,9 +29,19 @@ class GrapesJSModule extends AbstractModule
         return '';
     }
 
+    /**
+     * getPageHandler
+     *
+     * @return GrapesJSHandler
+     */
+    protected function getPageHandler(): GrapesJSHandler
+    {
+        return app('xe.grapes_js.handler');
+    }
+
     public function storeMenu($instanceId, $menuTypeParams, $itemParams)
     {
-        // TODO: Implement storeMenu() method.
+        $this->getPageHandler()->createPageInstance($instanceId, $menuTypeParams);
     }
 
     public function editMenuForm($instanceId): string

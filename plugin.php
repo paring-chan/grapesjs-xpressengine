@@ -3,6 +3,7 @@ namespace Pikokr\XePlugin\GrapesJs;
 
 use Route;
 use Xpressengine\Plugin\AbstractPlugin;
+use XeConfig;
 
 class Plugin extends AbstractPlugin
 {
@@ -42,6 +43,9 @@ class Plugin extends AbstractPlugin
      */
     public function activate($installedVersion = null)
     {
+        if (XeConfig::get('module/grapes_js@grapes_js') === null) {
+            XeConfig::add('module/grapes_js@grapes_js', []);
+        }
         // implement code
     }
 
@@ -52,7 +56,20 @@ class Plugin extends AbstractPlugin
      */
     public function install()
     {
-        // implement code
+    }
+
+    public function register()
+    {
+        $app = app();
+
+        $app->singleton(GrapesJSHandler::class, function ($app) {
+            return new GrapesJSHandler(
+                $app['xe.config'],
+                $app['xe.document']
+            );
+        });
+
+        $app->alias(GrapesJSHandler::class, 'xe.grapes_js.handler');
     }
 
     /**
