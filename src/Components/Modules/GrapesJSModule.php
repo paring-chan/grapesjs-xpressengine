@@ -1,10 +1,31 @@
 <?php
+
 namespace Pikokr\XePlugin\GrapesJs\Components\Modules;
 
-class GrapesJSModule extends \Xpressengine\Menu\AbstractModule {
-    public function createMenuForm()
+use View;
+use Route;
+use Xpressengine\Menu\AbstractModule;
+
+class GrapesJSModule extends AbstractModule
+{
+    public static function boot()
     {
-        // TODO: Implement createMenuForm() method.
+        self::registerSettingsRoute();
+    }
+
+    protected static function registerSettingsRoute()
+    {
+        Route::settings(self::getId(), function () {
+            Route::get('config/{pageId}', [
+                'as' => 'settings.grapes_js.grapes_js.config',
+                'uses' => 'Pikokr\XePlugin\GrapesJs\Controllers\GrapesJsSettingsController@editConfig']
+            );
+        });
+    }
+
+    public function createMenuForm(): string
+    {
+        return '';
     }
 
     public function storeMenu($instanceId, $menuTypeParams, $itemParams)
@@ -12,9 +33,14 @@ class GrapesJSModule extends \Xpressengine\Menu\AbstractModule {
         // TODO: Implement storeMenu() method.
     }
 
-    public function editMenuForm($instanceId)
+    public function editMenuForm($instanceId): string
     {
-        // TODO: Implement editMenuForm() method.
+        return '';
+    }
+
+    public static function getInstanceSettingURI($instanceId)
+    {
+        return route('settings.grapes_js.grapes_js.config', $instanceId);
     }
 
     public function updateMenu($instanceId, $menuTypeParams, $itemParams)

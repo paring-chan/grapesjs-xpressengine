@@ -36,7 +36,8 @@
   },
   "autoload": {
     "psr-4": {
-      "Pikokr\\XePlugin\\GrapesJs\\": "src/"
+      "Pikokr\\XePlugin\\GrapesJs\\": "src/",
+      "Pikokr\\XePlugin\\GrapesJs\\Components\\": "src/Components/"
     }
   }
 }
